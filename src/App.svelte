@@ -17,9 +17,9 @@ import { IfcClipper } from 'web-ifc-viewer/dist/components';
 
 	// load file from local disk
 	const loadIfc = async (event) => {
-   		await $viewer.loadIfc(event.target.files[0], true);
+   		await $viewer.IFC.loadIfc(event.target.files[0], true);
 		modelID.set($viewer.context.items.ifcModels[0].modelID)
-		ifcTree.set($viewer.getSpatialStructure($viewer.context.items.ifcModels[0].modelID))
+		ifcTree.set($viewer.IFC.getSpatialStructure($viewer.context.items.ifcModels[0].modelID))
 	}
 
 	// toggle Spatial Tree visibility
@@ -35,7 +35,7 @@ import { IfcClipper } from 'web-ifc-viewer/dist/components';
 	// on click set expID store value for use from other components like tree and props
 	function setExpressIdShowProps() {
 		if ($viewer) {
-			const found = $viewer.pickIfcItem();
+			const found = $viewer.IFC.pickIfcItem();
 			if (found) {
 				expID.set(found.id)
 			}
@@ -75,7 +75,7 @@ import { IfcClipper } from 'web-ifc-viewer/dist/components';
 	
 	<div id="viewer-container" 
 		style="width: 100vw; height: 100vh" 
-		on:mousemove={$viewer.prepickIfcItem()} 
+		on:mousemove={$viewer.IFC.prePickIfcItem()} 
 		on:keydown={$viewer.removeClippingPlane()}
 		on:click={setExpressIdShowProps}
 		on:dblclick={$viewer.addClippingPlane()}>
